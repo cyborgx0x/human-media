@@ -1,0 +1,22 @@
+version: '2'
+services:
+  db:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - MYSQL_DATABASE=humanmedia
+      - MYSQL_USER=humanmedia
+      - MYSQL_PASSWORD=123456
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+  # web:
+  #   build: .
+  #   command: gunicorn DjangoAPI.asgi
+  #   volumes:
+  #     - .:/code
+  #   ports:
+  #     - "8000:8000"
+  #   depends_on:
+  #     - db

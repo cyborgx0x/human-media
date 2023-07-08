@@ -20,4 +20,5 @@ from django.urls import include, path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("channel/", include("channel.urls")),
+    path("api/v1/channel/", include("channel.user.v1_0.urls")),
 ]
