@@ -11,9 +11,9 @@ class Channel(models.Model):
     '''
     check trùng channel_id
     '''
-    channel_id = models.CharField(max_length=250, null=True)
+    channel_id = models.CharField(max_length=250, null=True, unique=True)
     lastUpdate = models.DateTimeField(null=True)
     
 class Video(models.Model):
     video_id = models.CharField(max_length=250, unique=True)
-    channel = models.ForeignKey(Channel, related_name="video", on_delete=models.CASCADE, null=True, unique=True)
+    channel = models.ForeignKey(Channel, related_name="video", on_delete=models.CASCADE, null=True)

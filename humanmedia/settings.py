@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "channel",
     "rest_framework",
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -155,7 +156,7 @@ DATA_UPLOAD_MAX_NUMBER_FILES = 1000
 from celery.schedules import crontab
 
 CELERY_BEAT_SCHEDULE = {
-    "tracking-every-1-hour": {
+    "run_tracking_check": {
         "task": "channel.tasks.run_tracking_check",
         "schedule": crontab(hour="*"),
     },

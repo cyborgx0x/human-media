@@ -1,2 +1,4 @@
 celery -A humanmedia worker -l info -P eventlet
 celery -A humanmedia.celery beat
+
+celery -A humanmedia beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
