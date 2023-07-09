@@ -8,6 +8,9 @@ class Channel(models.Model):
     title = models.CharField(max_length=250, null=True, blank=True)
     thumbnail = models.CharField(max_length=250, null=True, blank=True)
     outputFolder = models.TextField(null=True)
+    '''
+    check trùng channel_id
+    '''
     channel_id = models.CharField(max_length=250, null=True)
     lastUpdate = models.DateTimeField(null=True)
     
