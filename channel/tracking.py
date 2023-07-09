@@ -25,19 +25,21 @@ def tracking():
             outputFolder=outputFolder,
         )
         try:
-            new_channel.save()
-
+            if not Channel.objects.filter(channel_id=channel_id).exists():
+                new_channel.save()
         except Exception as e:
             print(e)
+            
         channel_id = new_channel.id
         print(channel_id)
         videos = channel.findall("./videos/v")
         print(len(videos))
         for video in videos:
             video_id = video.get("id").split(":")[1]
-            new_video = Video.objects.create(video_id=video_id, channel_id=channel_id)
-            try:
-                new_video.save()
+            if not Video.objects.filter(video_id=video_id).exists():
+                new_video = Video.objects.create(video_id=video_id, channel_id=channel_id)
+                try:
+                    new_video.save()
 
-            except Exception as e:
-                print(e)
+                except Exception as e:
+                    print(e)

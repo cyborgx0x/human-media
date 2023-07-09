@@ -15,5 +15,5 @@ class Channel(models.Model):
     lastUpdate = models.DateTimeField(null=True)
     
 class Video(models.Model):
-    video_id = models.CharField(max_length=250)
-    channel = models.ForeignKey(Channel, related_name="video", on_delete=models.CASCADE, null=True)
+    video_id = models.CharField(max_length=250, unique=True)
+    channel = models.ForeignKey(Channel, related_name="video", on_delete=models.CASCADE, null=True, unique=True)
