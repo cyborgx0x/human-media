@@ -4,7 +4,7 @@ from channel.models import Channel, Video
 
 
 def tracking():
-    filename = "C:/Users/Luke/Downloads/tracking.mhx"
+    filename = "tracking.mhx"
     tree = ET.parse(filename)
     root = tree.getroot()
     channels = root.findall("./item")
