@@ -1,0 +1,1 @@
+celery -A humanmedia worker -l info -P eventlet

@@ -1,0 +1,11 @@
+
+
+{% extends "channel/base.html" %}
+{% block content %}
+Results for keyword: {{ keyword }}
+<br>
+{% for item in results %}
+    {{ item.title }} -- {{ item.url }} ||| {{ item.outputFolder }}
+{% endfor %}
+
+{% endblock content %}

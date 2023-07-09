@@ -1,4 +1,5 @@
-from rest_framework.generics import CreateAPIView, ListAPIView
+from django.shortcuts import render
+from rest_framework.generics import CreateAPIView, ListCreateAPIView
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
@@ -11,7 +12,7 @@ from .serializers import (
 )
 
 
-class SearchAPIView(CreateAPIView):
+class SearchAPIView(ListCreateAPIView):
     permission_classes = ()
     serializer_class = SearchChannelSerializer
     queryset = Channel.objects.all()
@@ -28,24 +29,37 @@ class SearchAPIView(CreateAPIView):
                 trả về danh sách channel
                 """
                 serializer = ChannelSerializer(instance=channels, many=True)
-                return Response(data=serializer.data)
-            """
-            trả về channel được tạo mới
-            """
-            new_channel = Channel.objects.create(url=url)
-            serializer = ChannelSerializer(instance=new_channel)
-            return Response(data=serializer.data)
+                data = dict(results=serializer.data, keyword=url)
+                render(request, "channel/search.html", data)
+            else:
+                new_channel = Channel.objects.create(url=url)
+                serializer = ChannelSerializer(instance=new_channel)
+                data = dict(
+                    results=[
+                        serializer.data,
+                    ],
+                    keyword=url,
+                )
+            return render(request, "channel/search_result.html", data)
+
+    def get(self, request, *args, **kwargs):
+        return render(request, "channel/search.html")
 
 
-class ImportAPIView(CreateAPIView):
+class ImportAPIView(ListCreateAPIView):
     permission_classes = ()
     serializer_class = ImportTrackingSerialzier
+    queryset = Channel.objects.all()
 
     def post(self, request, *args, **kwargs):
-        data = self
+        files = request.FILES
+        for file in files:
+            print(file)
+            print(files.get(file))
         """
         get the upload files here and parse it
         """
-        return None
+        return Response(data=dict(message="success"))
 
-
+    def get(self, request, *args, **kwargs):
+        return render(request, "channel/import_file.html")

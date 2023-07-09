@@ -120,7 +120,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+import os
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "static/"
 
 # Default primary key field type
@@ -144,3 +146,8 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = ()
+
+
+CELERY_BROKER_URL = "redis://127.0.0.1:6379"
+CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379"
+DATA_UPLOAD_MAX_NUMBER_FILES = 1000
