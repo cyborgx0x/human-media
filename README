@@ -1,1 +1,2 @@
 celery -A humanmedia worker -l info -P eventlet
+celery -A humanmedia.celery beat

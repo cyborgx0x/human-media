@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Human Media Tracking</title>
-        {% block head %}
-        {% endblock head %}
-    </head>
-    <body>
-    {% block content %}
+  <head>
+    <title>Human Media Tracking</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css"
+    />
+
+    {% block head %} {% endblock head %}
+  </head>
+  <body>
     
-    {% endblock content %}
-    </body>
+<div class="page">
+    <header class="navbar navbar-expand-sm navbar-light d-print-none">
+      <div class="container-xl">
+        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+          <a href="/">
+            Human Media Tracking
+          </a>
+        </h1>
+
+      </div>
+    </header>
+    <div class="page-wrapper">
+      <div class="page-body">
+        <div class="container-xl">
+            <form action="/" method="post">
+                <input type="text" value="" class="form-control form-control-rounded" placeholder="Search…" name="url"/>
+                <input type="submit" class="btn" value="Submit">
+            </form>
+            {% block content %} {% endblock content %}
+        </div>
+      </div>
+    </div>
+  </div>
+   
+  </body>
 </html>
+  

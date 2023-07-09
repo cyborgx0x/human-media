@@ -1,11 +1,26 @@
-
-
-{% extends "channel/base.html" %}
+{% extends "channel/base.html" %} 
 {% block content %}
-Results for keyword: {{ keyword }}
-<br>
-{% for item in results %}
-    {{ item.title }} -- {{ item.url }} ||| {{ item.outputFolder }}
-{% endfor %}
+<hr>
+<div class="row row-deck row-cards">
+  {% for item in results %}
+  <div class="col-4">
+    <div class="card">
+      <!-- Photo -->
+      <div
+        class="img-responsive img-responsive-21x9 card-img-top"
+        style="
+          background-image: url({{item.thumbnail}});
+        "
+      ></div>
+      <div class="card-body">
+        <h3 class="card-title">{{ item.title }}</h3>
+        <a href="{{ item.url }}"><h4>URL: {{ item.url }}</h4></a>
+        <h4><b> OUTPUT FOLDER: {{ item.outputFolder }} </b></h4>
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
+</div>
 
 {% endblock content %}

@@ -151,3 +151,12 @@ CORS_ORIGIN_WHITELIST = ()
 CELERY_BROKER_URL = "redis://127.0.0.1:6379"
 CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379"
 DATA_UPLOAD_MAX_NUMBER_FILES = 1000
+
+from celery.schedules import crontab
+
+CELERY_BEAT_SCHEDULE = {
+    "tracking-every-1-hour": {
+        "task": "channel.tasks.run_tracking_check",
+        "schedule": crontab(hour="*"),
+    },
+}

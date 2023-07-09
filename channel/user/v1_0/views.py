@@ -5,6 +5,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from channel.models import Channel
 from channel.tasks import run_tracking_check
+
 from .serializers import (
     ChannelSerializer,
     ImportTrackingSerialzier,
@@ -41,6 +42,8 @@ class SearchAPIView(ListCreateAPIView):
                     keyword=url,
                 )
             return render(request, "channel/search_result.html", data)
+        else:
+            return render(request, "channel/400.html")
 
     def get(self, request, *args, **kwargs):
         return render(request, "channel/search.html")
@@ -54,12 +57,10 @@ class ImportAPIView(ListCreateAPIView):
     def post(self, request, *args, **kwargs):
         files = request.FILES
         for file in files:
-            print(file)
-            print(files.get(file))
-            '''
+            """
             Lưu tệp lại rồi sau đó truyền vị trí tệp vào trong celery task
-            '''
-            filename=None
+            """
+            filename = None
             run_tracking_check.delay(filename=filename)
         """
         get the upload files here and parse it
